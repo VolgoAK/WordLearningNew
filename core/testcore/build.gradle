@@ -40,7 +40,7 @@ dependencies {
     //noinspection FragmentGradleConfiguration
     api "androidx.fragment:fragment-testing:$fragmentVersion"
     api 'com.agoda.kakao:kakao:2.1.0'
-    api "org.koin:koin-test:$koin_version"
+    api "io.insert-koin:koin-test:$koin_version"
 
     api "io.mockk:mockk:1.9.3"
 

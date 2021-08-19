@@ -1,3 +1,3 @@
 include ':data'
-include ':app', ':core:testcore', ':core:navigation', ':core:uicore', ':core:datacore'
+include ':app', ':core:testcore', ':core:datacore'
 rootProject.name = "WordLearningNew"
