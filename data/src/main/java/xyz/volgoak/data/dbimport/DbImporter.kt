@@ -21,11 +21,24 @@ class DbImporter(
     private val linksDao: LinkDao,
     private val wordsDao: WordDao
     ) {
+    companion object {
+        private const val PREFS_NAME = "DbImporterPrefs"
+        private const val KEY_DB_IMPORTED = "db_imported"
+    }
 
-    suspend fun importDbFromAssets() {
+    private val prefs by lazy {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
+
+    suspend fun importDbFromAssetsIfRequired() {
+        if(!prefs.getBoolean(KEY_DB_IMPORTED, false)) {
+            importDbFromAssets()
+        }
+    }
+
+    private suspend fun importDbFromAssets() {
         val asset = context.assets.open("words.json")
         val dictionaryJson = String(asset.readBytes())
-        Timber.d("TESTING json is $dictionaryJson")
         val adapter = moshi.adapter(DictionaryNt::class.java)
         val dictionary = adapter.fromJson(dictionaryJson)!!
 
@@ -33,6 +46,9 @@ class DbImporter(
         themeDao.insertThemes(themes)
 
         dictionary.sets.forEach { insertSet(it) }
+        prefs.edit()
+            .putBoolean(KEY_DB_IMPORTED, true)
+            .apply()
     }
 
     private suspend fun insertSet(wordsSet: WordSetNt) {

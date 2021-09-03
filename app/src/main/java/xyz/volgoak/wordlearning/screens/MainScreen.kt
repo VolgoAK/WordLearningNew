@@ -1,5 +1,6 @@
 package xyz.volgoak.wordlearning.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -12,25 +13,22 @@ import xyz.volgoak.wordlearning.screens.root.Destinations
 
 @Composable
 fun MainScreen(navController: NavController) {
-    Button(
-        onClick = { navController.navigate(Destinations.SETS) },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = stringResource(R.string.main_sets)
-        )
-    }
-    /*Column(
-        modifier = Modifier.padding(all = 16.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
+    Column {
         Button(
-            onClick = {navController.navigate(Destinations.SETS)},
+            onClick = { navController.navigate(Destinations.SETS) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
                 text = stringResource(R.string.main_sets)
             )
         }
-    }*/
+        Button(
+            onClick = { navController.navigate(Destinations.DICTIONARY) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = stringResource(R.string.main_dictionary)
+            )
+        }
+    }
 }

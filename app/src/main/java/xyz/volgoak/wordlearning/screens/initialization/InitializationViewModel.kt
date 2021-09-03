@@ -22,7 +22,7 @@ class InitializationViewModel(
     private fun importDbIfRequired() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                dbImporter.importDbFromAssets()
+                dbImporter.importDbFromAssetsIfRequired()
             }
             navigationFlow.emit(Event(Destinations.MAIN))
         }

@@ -29,4 +29,7 @@ interface SetsDao {
 
     @Query("SELECT * FROM SETS_TABLE WHERE THEME_CODES LIKE :themeCode")
     suspend fun getSetsByTheme(themeCode: String): List<WordsSet>
+
+    @Query("UPDATE SETS_TABLE SET STATUS=:status WHERE _id=:setId")
+    suspend fun updateSetStatus(setId: Long, status: Int)
 }

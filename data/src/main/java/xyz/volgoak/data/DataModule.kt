@@ -4,6 +4,9 @@ import androidx.room.Room
 import com.squareup.moshi.Moshi
 import org.koin.dsl.module
 import xyz.volgoak.data.dbimport.DbImporter
+import xyz.volgoak.data.imageloading.ImageDownloader
+import xyz.volgoak.data.repository.WordsRepository
+import xyz.volgoak.data.repository.WordsRepositoryImpl
 import xyz.volgoak.datacore.BuildConfig
 
 val dataModule = module {
@@ -29,7 +32,13 @@ val dataModule = module {
     single { get<WordsDataBase>().wordDao() }
 
     single<SetsRepository> {
-        SetsRepositoryImpl(setsDao = get())
+        SetsRepositoryImpl(
+            setsDao = get(),
+            wordsDao = get()
+        )
+    }
+    single<WordsRepository> {
+        WordsRepositoryImpl(wordsDao = get())
     }
 
     single {
@@ -45,5 +54,5 @@ val dataModule = module {
 
     single { Moshi.Builder().build() }
 
-    single { ImageDownloader(get())}
+    single { ImageDownloader(get()) }
 }

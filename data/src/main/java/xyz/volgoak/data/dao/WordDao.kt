@@ -15,7 +15,7 @@ interface WordDao {
     suspend fun dictionaryWords(): List<Word>
 
     @Query("SELECT * FROM words_table WHERE STATUS=${DBConstants.Words.IN_DICTIONARY}")
-    fun dictionaryWordsFlowable(): Flow<List<Word>>
+    fun dictionaryWordsFlow(): Flow<List<Word>>
 
     @Query("SELECT * FROM words_table WHERE STATUS=${DBConstants.Words.IN_DICTIONARY}")
     fun dictionaryWordsFlowableLD(): Flow<List<Word>>
@@ -66,11 +66,22 @@ interface WordDao {
     )
     suspend fun getWordsBySetId(setId: Long): List<Word>
 
-    @Query("""
+    @Query(
+        """
             SELECT * FROM words_table 
             WHERE _id IN
                 (SELECT ${DBConstants.WordLinks.COLUMN_WORD_ID} FROM ${DBConstants.WordLinks.TABLE_NAME}
                 WHERE ${DBConstants.WordLinks.COLUMN_SET_ID}=:setId)"""
     )
     fun getWordsBySetIdFlow(setId: Long): Flow<MutableList<Word>>
+
+    @Query(
+        """
+        UPDATE words_table
+        SET STATUS=:status
+        WHERE _id IN
+            (SELECT ${DBConstants.WordLinks.COLUMN_WORD_ID} FROM ${DBConstants.WordLinks.TABLE_NAME}
+                WHERE ${DBConstants.WordLinks.COLUMN_SET_ID}=:setId)"""
+    )
+    suspend fun updateStatusForSetId(setId: Long, status: Int)
 }

@@ -6,7 +6,7 @@ import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
-import xyz.volgoak.data.ImageDownloader
+import xyz.volgoak.data.imageloading.ImageDownloader
 import xyz.volgoak.data.dataModules
 import xyz.volgoak.wordlearning.di.appModule
 import xyz.volgoak.wordlearning.di.viewModelsModule
@@ -31,6 +31,6 @@ class WordsApp : Application() {
         }
 
         get<ImageDownloader>()
-            .downloadAllImages()
+            .downloadAllImagesIfRequired()
     }
 }

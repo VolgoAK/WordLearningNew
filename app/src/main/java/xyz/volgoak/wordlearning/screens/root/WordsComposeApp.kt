@@ -7,7 +7,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import xyz.volgoak.wordlearning.screens.MainScreen
+import xyz.volgoak.wordlearning.screens.dictionary.DictionaryScreen
 import xyz.volgoak.wordlearning.screens.initialization.InitializationScreen
+import xyz.volgoak.wordlearning.screens.setdetails.SetDetailsScreen
 import xyz.volgoak.wordlearning.screens.sets.SetsScreen
 
 @Composable
@@ -35,6 +37,17 @@ fun WordsNavHost(
         }
         composable(Destinations.INITIALIZATION) {
             InitializationScreen(navController)
+        }
+        composable(Destinations.SET_DETAILS_ROUTE) {
+            val setId = it.arguments?.getString(Destinations.SET_ID_KEY)
+                ?.toLongOrNull() ?: 0L
+            SetDetailsScreen(
+                navController = navController,
+                setId = setId
+            )
+        }
+        composable(Destinations.DICTIONARY) {
+            DictionaryScreen(navController)
         }
     }
 }
