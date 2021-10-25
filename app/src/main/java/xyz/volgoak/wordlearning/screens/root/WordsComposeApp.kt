@@ -11,6 +11,8 @@ import xyz.volgoak.wordlearning.screens.dictionary.DictionaryScreen
 import xyz.volgoak.wordlearning.screens.initialization.InitializationScreen
 import xyz.volgoak.wordlearning.screens.setdetails.SetDetailsScreen
 import xyz.volgoak.wordlearning.screens.sets.SetsScreen
+import xyz.volgoak.wordlearning.screens.training.TrainingScreen
+import xyz.volgoak.wordlearning.screens.training.result.TrainingResultScreen
 
 @Composable
 fun WordsComposeApp() {
@@ -48,6 +50,12 @@ fun WordsNavHost(
         }
         composable(Destinations.DICTIONARY) {
             DictionaryScreen(navController)
+        }
+        composable(Destinations.TRAINING) {
+            TrainingScreen(navController)
+        }
+        composable(Destinations.TRAINING_RESULTS) {
+            TrainingResultScreen(navController)
         }
     }
 }

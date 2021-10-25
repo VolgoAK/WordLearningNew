@@ -8,6 +8,7 @@ import xyz.volgoak.wordlearning.screens.initialization.InitializationViewModel
 import xyz.volgoak.wordlearning.screens.root.RootViewModel
 import xyz.volgoak.wordlearning.screens.setdetails.SetDetailsViewModel
 import xyz.volgoak.wordlearning.screens.sets.SetsViewModel
+import xyz.volgoak.wordlearning.screens.training.TrainingViewModel
 
 val viewModelsModule = module {
     viewModel {
@@ -39,5 +40,9 @@ val viewModelsModule = module {
 
     viewModel {
         DictionaryViewModel(wordsRepository = get())
+    }
+
+    viewModel {
+        TrainingViewModel(trainingRepository = get())
     }
 }

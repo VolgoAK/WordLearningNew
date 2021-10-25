@@ -11,9 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -29,6 +27,7 @@ import org.koin.androidx.compose.getViewModel
 import xyz.volgoak.data.StorageContract
 import xyz.volgoak.data.entities.WordsSet
 import xyz.volgoak.wordlearning.R
+import xyz.volgoak.wordlearning.elements.WordsScaffold
 import xyz.volgoak.wordlearning.screens.root.Destinations
 import java.io.File
 
@@ -36,23 +35,9 @@ import java.io.File
 fun SetsScreen(navController: NavController) {
     val viewModel = getViewModel<SetsViewModel>()
     val sets = viewModel.sets.collectAsState()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "sets")
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.core_back),
-                            tint = MaterialTheme.colors.onSurface
-                        )
-                    }
-                },
-            )
-        }
+    WordsScaffold(
+        title = stringResource(id = R.string.main_sets),
+        onNavigationClick = { navController.popBackStack() }
     ) {
         LazyColumn {
             items(sets.value) { item ->

@@ -9,6 +9,8 @@ object Destinations {
     const val SET_DETAILS_FORMAT = "$SET_DETAILS/%d"
     const val SET_DETAILS_ROUTE = "$SET_DETAILS/{$SET_ID_KEY}"
     const val DICTIONARY = "dictionary"
+    const val TRAINING = "training"
+    const val TRAINING_RESULTS = "training_results"
 
     fun setDetails(id: Long) = SET_DETAILS_FORMAT.format(id)
 }

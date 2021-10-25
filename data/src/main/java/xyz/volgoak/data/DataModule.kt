@@ -7,6 +7,8 @@ import xyz.volgoak.data.dbimport.DbImporter
 import xyz.volgoak.data.imageloading.ImageDownloader
 import xyz.volgoak.data.repository.WordsRepository
 import xyz.volgoak.data.repository.WordsRepositoryImpl
+import xyz.volgoak.data.training.TrainingRepository
+import xyz.volgoak.data.training.TrainingRepositoryImpl
 import xyz.volgoak.datacore.BuildConfig
 
 val dataModule = module {
@@ -37,8 +39,13 @@ val dataModule = module {
             wordsDao = get()
         )
     }
+
     single<WordsRepository> {
         WordsRepositoryImpl(wordsDao = get())
+    }
+
+    single<TrainingRepository> {
+        TrainingRepositoryImpl(wordsDao = get())
     }
 
     single {

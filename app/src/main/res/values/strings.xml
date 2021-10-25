@@ -6,4 +6,7 @@
     <string name="main_dictionary">Dictionary</string>
     <string name="main_sets">Sets</string>
 
+    <string name="training_next">Next</string>
+    <string name="training_finished">Training finished</string>
+
 </resources>
